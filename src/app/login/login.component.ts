@@ -1,6 +1,6 @@
-import { Component, OnInit }  from '@angular/core';
-import { Observable }         from 'rxjs/Observable';
-import { LoginService }       from '../login.service';
+import { Component, OnInit } from '@angular/core';
+import {Observable}  from 'rxjs/Observable';
+import {LoginService} from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +13,18 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor (private loginService: LoginService) {
-    if (localStorage.getItem('PortalAdminHasLoggedIn') == '' || localStorage.getItem('PortalAdminHasLoggedIn') == null)
+	constructor (private loginService: LoginService) {
+    if(localStorage.getItem('PortalAdminHasLoggedIn') == '' || localStorage.getItem('PortalAdminHasLoggedIn') == null) {
       this.loggedIn = false;
-    else
+    } else {
       this.loggedIn = true;
-
+    }
   }
-
-  onSubmit(){
-    this.loginService.sendCredential(this.username, this.password).subscribe(
+  
+  onSubmit() {
+  	this.loginService.sendCredential(this.username, this.password).subscribe(
       res => {
-        this.loggedIn = true;
+        this.loggedIn=true;
         localStorage.setItem('PortalAdminHasLoggedIn', 'true');
         location.reload();
       },
@@ -32,6 +32,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit() {  }
+  ngOnInit() {}
 
 }
